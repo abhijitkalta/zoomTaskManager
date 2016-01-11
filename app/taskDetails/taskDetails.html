@@ -1,25 +1,27 @@
 <div class="container">
             <div class="content">
             <h3>Zoom Task Manager</h3>
-
+            <small style="color:#6C7A89; font-family: Verdana"> To-do List, Task List</small>
+            <br />
+            <hr />
             <form class="form-horizontal" role="form" name="form">
               <div class="form-group">
-                <label class="control-label col-sm-2" for="description">Description:</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="description" placeholder="What do you need to do?" ng-model="task.newTask">
+                <label class="control-label col-sm-2" for="description" style="color:#6C7A89; font-weight:normal; font-size: 18px">Description:</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="description" placeholder="What do you need to do?" ng-model="task.newTask" size="50">
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-2" for="category">Category:</label>
-                <div class="col-sm-10">
+                <label class="control-label col-sm-2" for="category" style="color:#6C7A89; font-weight:normal; font-size: 18px">Category:</label>
+                <div class="col-sm-6">
                   <select id="category" ng-model="task.newTaskCategory" ng-options="obj.name for obj in categories">
                       <option  value="">Choose a category</option>
                   </select>
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-2" for="duedate">Due Date:</label>
-                  <div class="col-sm-10">
+                <label class="control-label col-sm-2" for="duedate" style="color:#6C7A89; font-weight:normal; font-size: 18px">Due Date:</label>
+                  <div class="col-sm-6">
                     <input type="date" class="form-control" id="duedate" ng-model="task.newTaskDate">
                   </div>
               </div>
@@ -32,18 +34,26 @@
           </div>
   </div>
   <br />
-  <div class="container">
-    <label ><span class="letters" style="color:#6C7A89; font-weight:normal; font-size: 20px">Search:</span> <input ng-model="searchText"></label>
-</div>
- <br />
+  <hr />
+
+
 
 <div class="container">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="search" style="color:#6C7A89; font-weight:normal; font-size: 18px">Search:</label>
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="search" ng-model="searchText">
+      </div>
+  </div>
+<br />
+<br />
   <div class="row">
-  <div class="col-md-3" style="border: 1px solid black; margin-right: 50px; width: 250px; padding: 10px">Ideas
-
+  <div class="col-md-3 cards"  style="background-color: #59ABE3;   width: 255px;"><span style="font-family: Verdana; font-size: 16px; color: #BDC3C7">Ideas</span>
+          <br />
+          <hr />
           <ul style="list-style-type: none; margin: 0px; padding: 0px">
             <li>
-              <div class="panel panel-default" ng-repeat="idea in idea | filter: searchText">
+              <div class="panel panel-default" ng-repeat="idea in idea | filter: searchText" style=" margin-top: -10px; box-shadow: 4px 2px 2px grey;">
                 <div class="panel-body" >{{idea.description}}</div>
 
                 <div class="panel-footer">
@@ -92,10 +102,12 @@
 
 
   </div>
-  <div class="col-md-3" style="border: 1px solid black; margin-right: 50px; width: 250px; padding: 10px">To-Do
+  <div class="col-md-3 cards" style="width: 255px; background-color: #F22613"><span style="font-family: Verdana; font-size: 16px; color: #BDC3C7">To-Do</span>
+    <br />
+    <hr />
     <ul style="list-style-type: none; margin: 0px; padding: 0px;" >
       <li>
-        <div class="panel panel-default" ng-repeat="todo in todo | filter: searchText">
+        <div class="panel panel-default" ng-repeat="todo in todo | filter: searchText" style=" margin-top: -10px; box-shadow: 4px 2px 2px grey;">
           <div class="panel-body">{{todo.description}}</div>
           <div class="panel-footer">
             <div><i class="fa fa-calendar"></i> {{todo.date | date : 'mediumDate'}}
@@ -132,9 +144,7 @@
             <i class="fa fa-wrench"></i></i> Doing
         </a>
 
-        <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="completeTask(todo)">
-          <i class="fa fa-check"></i></i> Done
-      </a>
+
 
           <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="deleteTask(todo)">
             <i class="fa fa-remove"></i></i> Delete
@@ -144,10 +154,12 @@
       </li>
     </ul>
   </div>
-  <div class="col-md-3" style="border: 1px solid black; margin-right: 50px; width: 250px; padding: 10px">Doing
+  <div class="col-md-3 cards" style="width: 255px; background-color: #F4D03F"><span style="font-family: Verdana; font-size: 16px; color: #BDC3C7">Doing</span>
+    <br />
+    <hr />
     <ul style="list-style-type: none; margin: 0px; padding: 0px">
       <li>
-        <div class="panel panel-default" ng-repeat="doing in doing | filter: searchText">
+        <div class="panel panel-default" ng-repeat="doing in doing | filter: searchText" style=" margin-top: -10px; box-shadow: 4px 2px 2px grey;">
           <div class="panel-body">{{doing.description}}</div>
           <div class="panel-footer">
             <div><i class="fa fa-calendar"></i> {{doing.date | date : 'mediumDate'}}
@@ -194,10 +206,12 @@
       </li>
     </ul>
   </div>
-  <div class="col-md-3" style="border: 1px solid black; width: 250px; padding: 10px">Completed
+  <div class="col-md-3 cards" style="width: 255px; background-color: #03A678"><span style="font-family: Verdana; font-size: 16px; color: #BDC3C7">Completed</span>
+    <br />
+    <hr />
     <ul style="list-style-type: none; margin: 0px; padding: 0px">
       <li>
-        <div class="panel panel-default" ng-repeat="completed in completed | filter: searchText">
+        <div class="panel panel-default" ng-repeat="completed in completed | filter: searchText" style=" margin-top: -10px; box-shadow: 4px 2px 2px grey;">
           <div class="panel-body">{{completed.description}}</div>
           <div class="panel-footer">
             <div><i class="fa fa-calendar"></i> {{completed.date | date : 'mediumDate'}}
@@ -231,9 +245,7 @@
             <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="addToCache(completed.description)">
               <span class="glyphicon glyphicon-thumbs-up"></span> Likes {{getFromCache(completed.description)}}
           </a>
-          <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="doingTask(completed)">
-            <i class="fa fa-wrench"></i></i> Doing
-        </a>
+
         <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="deleteTask(completed)">
           <i class="fa fa-remove"></i></i> Delete
       </a>

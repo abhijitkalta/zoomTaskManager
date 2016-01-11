@@ -1,5 +1,5 @@
 zoomTaskManagerApp.controller('taskDetailsController',
-    function taskDetailsController($scope, $route, myCache, CacheFactory) {
+    function taskDetailsController($scope, $route, myCache,myCacheLikes, CacheFactory) {
 
 
     //to store tasks in localStorage permanently
@@ -13,7 +13,7 @@ zoomTaskManagerApp.controller('taskDetailsController',
 
     //to store likes in localStorage permanently
     var myCacheLikes = CacheFactory.get('myCacheLikes');
-    myCache.setOptions({
+    myCacheLikes.setOptions({
         //to reset cache onexpire
         onExpire : function(key,value){
         myCacheLikes.put(key,value);
@@ -33,25 +33,27 @@ zoomTaskManagerApp.controller('taskDetailsController',
        {name: 'Completed'},
    ];
 
-   
+
 
    $scope.addNew = function (task) {
 
         if(task.newTaskCategory == undefined ){
         task.newTaskCategory = { name: "Idea"};
       }
+
+      if(task.newTask == undefined){
+        task.newTask = "Default Task";
+      }
         if (task.newTaskDate == null || task.newTaskDate == '') {
             $scope.taskItem.push({
                 description: task.newTask,
                 date: "No deadline",
-                complete: false,
                 category: task.newTaskCategory.name,
             })
         } else {
             $scope.taskItem.push({
                 description: task.newTask,
                 date: task.newTaskDate,
-                complete: false,
                 category: task.newTaskCategory.name,
             })
         };
@@ -67,7 +69,7 @@ zoomTaskManagerApp.controller('taskDetailsController',
 
     $scope.completeTask = function (task) {
       function getCompletedTask(elem){
-        return ( elem.description == task.description && elem.date == task.date);
+        return ( elem.description == task.description && elem.date == task.date && elem.category == task.category);
       }
         var result = _.filter($scope.taskItem, getCompletedTask);
         result[0].category = "Completed";
@@ -81,7 +83,7 @@ zoomTaskManagerApp.controller('taskDetailsController',
     $scope.doingTask = function(task) {
 
       function getDoingTask(elem){
-        return ( elem.description == task.description && elem.date == task.date);
+        return ( elem.description == task.description && elem.date == task.date && elem.category == task.category);
       }
         var result = _.filter($scope.taskItem, getDoingTask);
         result[0].category = "Doing";
@@ -94,15 +96,10 @@ zoomTaskManagerApp.controller('taskDetailsController',
     $scope.todoTask = function(task) {
 
       function getTodoTask(elem){
-        return ( elem.description == task.description && elem.date == task.date);
+        return ( elem.description == task.description && elem.date == task.date && elem.category == task.category);
       }
         var result = _.filter($scope.taskItem, getTodoTask);
-        $scope.taskItem.push({
-            description: result[0].description,
-            date: result[0].date,
-            complete: false,
-            category: "To-Do"
-        })
+        result[0].category = "To-Do";
         $scope.idea = _.where($scope.taskItem, { category: "Idea"});
         $scope.todo = _.where($scope.taskItem, {category: "To-Do"});
         $scope.doing = _.where($scope.taskItem, {category: "Doing"});

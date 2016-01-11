@@ -28,3 +28,20 @@
   content: "";
   padding: 0;
 }
+
+body {
+  background: #ECE9E6; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #ECE9E6 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.cards {
+  border-radius: 5px;
+  border: 1px solid #95A5A6;
+  margin-right: 30px;
+  padding: 10px;
+}
+
+.cards:hover {
+  box-shadow: 5px 5px 5px grey;
+}
