@@ -2,7 +2,7 @@
             <div class="content">
             <h3>Zoom Task Manager</h3>
 
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" name="form">
               <div class="form-group">
                 <label class="control-label col-sm-2" for="description">Description:</label>
                 <div class="col-sm-10">
@@ -13,7 +13,7 @@
                 <label class="control-label col-sm-2" for="category">Category:</label>
                 <div class="col-sm-10">
                   <select id="category" ng-model="task.newTaskCategory" ng-options="obj.name for obj in categories">
-                      <option class="disabled" value="">Choose a category</option>
+                      <option  value="">Choose a category</option>
                   </select>
                 </div>
               </div>
@@ -45,8 +45,34 @@
             <li>
               <div class="panel panel-default" ng-repeat="idea in idea | filter: searchText">
                 <div class="panel-body" >{{idea.description}}</div>
+
                 <div class="panel-footer">
-                  <div><i class="fa fa-calendar"></i> {{idea.date | date : 'mediumDate'}} </div>
+                  <div><i class="fa fa-calendar"></i> {{idea.date | date : 'mediumDate'}}
+                    <!-- Trigger the modal with a button -->
+      <button type="button" data-toggle="modal" data-target="#myModal" style="float: right">Edit</button>
+
+      <!-- Modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Edit Task</h4>
+            </div>
+            <div class="modal-body">
+              <label for="description">Description: </label>
+              <input type=text ng-model="idea.description" id="description"/>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+                  </div>
                   <br/>
                   <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="addToCache(idea.description)">
                     <span class="glyphicon glyphicon-thumbs-up"></span> Likes {{getFromCache(idea.description)}}
@@ -57,6 +83,8 @@
                 <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="deleteTask(idea)">
                   <i class="fa fa-remove"></i></i> Delete
               </a>
+
+
               </div>
             </li>
           </ul>
@@ -70,7 +98,32 @@
         <div class="panel panel-default" ng-repeat="todo in todo | filter: searchText">
           <div class="panel-body">{{todo.description}}</div>
           <div class="panel-footer">
-            <div><i class="fa fa-calendar"></i> {{todo.date | date : 'mediumDate'}} </div>
+            <div><i class="fa fa-calendar"></i> {{todo.date | date : 'mediumDate'}}
+              <!-- Trigger the modal with a button -->
+<button type="button" data-toggle="modal" data-target="#myModal" style="float: right">Edit</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Task</h4>
+      </div>
+      <div class="modal-body">
+        <label for="description">Description: </label>
+        <input type=text ng-model="todo.description" id="description"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+            </div>
             <br/>
             <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="addToCache(todo.description)">
               <span class="glyphicon glyphicon-thumbs-up"></span> Likes {{getFromCache(todo.description)}}
@@ -97,7 +150,33 @@
         <div class="panel panel-default" ng-repeat="doing in doing | filter: searchText">
           <div class="panel-body">{{doing.description}}</div>
           <div class="panel-footer">
-            <div><i class="fa fa-calendar"></i> {{doing.date | date : 'mediumDate'}} </div>
+            <div><i class="fa fa-calendar"></i> {{doing.date | date : 'mediumDate'}}
+              <!-- Trigger the modal with a button -->
+<button type="button" data-toggle="modal" data-target="#myModal" style="float: right">Edit</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Task</h4>
+      </div>
+      <div class="modal-body">
+        <label for="description">Description: </label>
+        <input type=text ng-model="doing.description" id="description"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+            </div>
             <br/>
             <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="addToCache(doing.description)">
               <span class="glyphicon glyphicon-thumbs-up"></span> Likes {{getFromCache(doing.description)}}
@@ -121,7 +200,33 @@
         <div class="panel panel-default" ng-repeat="completed in completed | filter: searchText">
           <div class="panel-body">{{completed.description}}</div>
           <div class="panel-footer">
-            <div><i class="fa fa-calendar"></i> {{completed.date | date : 'mediumDate'}} </div>
+            <div><i class="fa fa-calendar"></i> {{completed.date | date : 'mediumDate'}}
+              <!-- Trigger the modal with a button -->
+<button type="button" data-toggle="modal" data-target="#myModal" style="float: right">Edit</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Task</h4>
+      </div>
+      <div class="modal-body">
+        <label for="description">Description: </label>
+        <input type=text ng-model="completed.description" id="description"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+            </div>
             <br/>
             <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="addToCache(completed.description)">
               <span class="glyphicon glyphicon-thumbs-up"></span> Likes {{getFromCache(completed.description)}}

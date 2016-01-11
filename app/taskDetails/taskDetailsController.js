@@ -33,22 +33,26 @@ zoomTaskManagerApp.controller('taskDetailsController',
        {name: 'Completed'},
    ];
 
-   $scope.newTaskCategory = $scope.categories;
+   
 
    $scope.addNew = function (task) {
+
+        if(task.newTaskCategory == undefined ){
+        task.newTaskCategory = { name: "Idea"};
+      }
         if (task.newTaskDate == null || task.newTaskDate == '') {
             $scope.taskItem.push({
                 description: task.newTask,
                 date: "No deadline",
                 complete: false,
-                category: task.newTaskCategory.name
+                category: task.newTaskCategory.name,
             })
         } else {
             $scope.taskItem.push({
                 description: task.newTask,
                 date: task.newTaskDate,
                 complete: false,
-                category: task.newTaskCategory.name
+                category: task.newTaskCategory.name,
             })
         };
         $scope.newTask = '';
