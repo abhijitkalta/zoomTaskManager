@@ -1,0 +1,142 @@
+<div class="container">
+            <div class="content">
+            <h3>Zoom Task Manager</h3>
+
+            <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="description">Description:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="description" placeholder="What do you need to do?" ng-model="task.newTask">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="category">Category:</label>
+                <div class="col-sm-10">
+                  <select id="category" ng-model="task.newTaskCategory" ng-options="obj.name for obj in categories">
+                      <option class="disabled" value="">Choose a category</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="duedate">Due Date:</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control" id="duedate" ng-model="task.newTaskDate">
+                  </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button class="btn btn-default" ng-click="addNew(task)"><i class="fa fa-plus icon"></i> Add Task</button>
+                </div>
+              </div>
+            </form>
+          </div>
+  </div>
+  <br />
+  <div class="container">
+    <label ><span class="letters" style="color:#6C7A89; font-weight:normal; font-size: 20px">Search:</span> <input ng-model="searchText"></label>
+</div>
+ <br />
+
+<div class="container">
+  <div class="row">
+  <div class="col-md-3" style="border: 1px solid black; margin-right: 50px; width: 250px; padding: 10px">Ideas
+
+          <ul style="list-style-type: none; margin: 0px; padding: 0px">
+            <li>
+              <div class="panel panel-default" ng-repeat="idea in idea | filter: searchText">
+                <div class="panel-body" >{{idea.description}}</div>
+                <div class="panel-footer">
+                  <div><i class="fa fa-calendar"></i> {{idea.date | date : 'mediumDate'}} </div>
+                  <br/>
+                  <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="addToCache(idea.description)">
+                    <span class="glyphicon glyphicon-thumbs-up"></span> Likes {{getFromCache(idea.description)}}
+                </a>
+                <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="todoTask(idea)">
+                  <i class="fa fa-plus-square"></i></i> To-Do
+              </a>
+                <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="deleteTask(idea)">
+                  <i class="fa fa-remove"></i></i> Delete
+              </a>
+              </div>
+            </li>
+          </ul>
+
+
+
+  </div>
+  <div class="col-md-3" style="border: 1px solid black; margin-right: 50px; width: 250px; padding: 10px">To-Do
+    <ul style="list-style-type: none; margin: 0px; padding: 0px;" >
+      <li>
+        <div class="panel panel-default" ng-repeat="todo in todo | filter: searchText">
+          <div class="panel-body">{{todo.description}}</div>
+          <div class="panel-footer">
+            <div><i class="fa fa-calendar"></i> {{todo.date | date : 'mediumDate'}} </div>
+            <br/>
+            <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="addToCache(todo.description)">
+              <span class="glyphicon glyphicon-thumbs-up"></span> Likes {{getFromCache(todo.description)}}
+          </a>
+          <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="doingTask(todo)">
+            <i class="fa fa-wrench"></i></i> Doing
+        </a>
+
+        <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="completeTask(todo)">
+          <i class="fa fa-check"></i></i> Done
+      </a>
+
+          <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="deleteTask(todo)">
+            <i class="fa fa-remove"></i></i> Delete
+        </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-3" style="border: 1px solid black; margin-right: 50px; width: 250px; padding: 10px">Doing
+    <ul style="list-style-type: none; margin: 0px; padding: 0px">
+      <li>
+        <div class="panel panel-default" ng-repeat="doing in doing | filter: searchText">
+          <div class="panel-body">{{doing.description}}</div>
+          <div class="panel-footer">
+            <div><i class="fa fa-calendar"></i> {{doing.date | date : 'mediumDate'}} </div>
+            <br/>
+            <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="addToCache(doing.description)">
+              <span class="glyphicon glyphicon-thumbs-up"></span> Likes {{getFromCache(doing.description)}}
+          </a>
+
+          <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="completeTask(doing)">
+            <i class="fa fa-check"></i></i> Done
+        </a>
+
+          <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="deleteTask(doing)">
+            <i class="fa fa-remove"></i></i> Delete
+        </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-3" style="border: 1px solid black; width: 250px; padding: 10px">Completed
+    <ul style="list-style-type: none; margin: 0px; padding: 0px">
+      <li>
+        <div class="panel panel-default" ng-repeat="completed in completed | filter: searchText">
+          <div class="panel-body">{{completed.description}}</div>
+          <div class="panel-footer">
+            <div><i class="fa fa-calendar"></i> {{completed.date | date : 'mediumDate'}} </div>
+            <br/>
+            <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="addToCache(completed.description)">
+              <span class="glyphicon glyphicon-thumbs-up"></span> Likes {{getFromCache(completed.description)}}
+          </a>
+          <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="doingTask(completed)">
+            <i class="fa fa-wrench"></i></i> Doing
+        </a>
+        <a href=""  style="text-decoration :none; display: inline; margin: 2px" ng-click="deleteTask(completed)">
+          <i class="fa fa-remove"></i></i> Delete
+      </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</div>
